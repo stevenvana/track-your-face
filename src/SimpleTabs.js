@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabPanel from "./TabPanel";
+import TakePicture from "./TakePicture";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,7 +16,6 @@ const useStyles = makeStyles(theme => ({
 export default function SimpleTabs() {
   const classes = useStyles();
   const [value, setValue] = useState(0);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -23,16 +23,24 @@ export default function SimpleTabs() {
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs
-          // value={value}
-          // onChange={handleChange}
+          value={value}
+          onChange={handleChange}
           aria-label="simple tabs example"
         >
-          <Tab label="Take your picture" />
-          <Tab label="Track your face's history" />
+          <Tab
+            label="Take your picture"
+            id="simple-tab-0"
+            aria-controls="simple-tabpanel-0"
+          />
+          <Tab
+            label="Show graph"
+            id="simple-tab-1"
+            aria-controls="simple-tabpanel-1"
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        (temp) Picture is shown here
+        <TakePicture />
       </TabPanel>
       <TabPanel value={value} index={1}>
         (temp) graph with face history is shown here

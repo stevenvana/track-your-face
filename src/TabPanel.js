@@ -1,11 +1,10 @@
-/* eslint-disable react/forbid-prop-types */
 import React from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
 export default function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { value, index, children } = props;
 
   return (
     <Typography
@@ -14,8 +13,6 @@ export default function TabPanel(props) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...other}
     >
       <Box p={3}>{children}</Box>
     </Typography>
@@ -23,8 +20,7 @@ export default function TabPanel(props) {
 }
 
 TabPanel.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+  children: PropTypes.string.isRequired
 };
