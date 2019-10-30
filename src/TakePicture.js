@@ -1,6 +1,7 @@
 import React from "react";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
+import Camera from "react-html5-camera-photo";
 import { makeStyles } from "@material-ui/core/styles";
 import { StyledTakePicture } from "./styled";
 
