@@ -22,5 +22,5 @@ export default function TabPanel(props) {
 TabPanel.propTypes = {
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
-  children: PropTypes.string.isRequired
+  children: PropTypes.object.isRequired
 };
