@@ -5,6 +5,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabPanel from "./TabPanel";
 import TakePicture from "./TakePicture";
+import DisplayGraph from "./DisplayGraph";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,6 +20,44 @@ export default function SimpleTabs() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const [emotionData, setEmotionData] = useState([
+    {
+      emotion: {
+        sadness: 0.045,
+        neutral: 40.298,
+        disgust: 0.018,
+        anger: 0.031,
+        surprise: 0.781,
+        fear: 0.018,
+        happiness: 58.809
+      },
+      date: 1572867352415
+    },
+    {
+      emotion: {
+        sadness: 4.045,
+        neutral: 36.298,
+        disgust: 4.018,
+        anger: 2.031,
+        surprise: 5.781,
+        fear: 3.018,
+        happiness: 44.809
+      },
+      date: 1572867451853
+    },
+    {
+      emotion: {
+        sadness: 9.045,
+        neutral: 31.298,
+        disgust: 7.018,
+        anger: 5.031,
+        surprise: 8.781,
+        fear: 6.018,
+        happiness: 32.809
+      },
+      date: 1572867571785
+    }
+  ]);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -43,7 +82,7 @@ export default function SimpleTabs() {
         <TakePicture />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        (temp) graph with face history is shown here
+        <DisplayGraph emotionData={emotionData} />
       </TabPanel>
     </div>
   );
