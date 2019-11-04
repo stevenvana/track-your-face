@@ -20,7 +20,8 @@ export default function SimpleTabs() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const [emotionData, setEmotionData] = useState([
+  // const [emotionData, setEmotionData] = useState([
+  const emotionData = [
     {
       emotion: {
         sadness: 0.045,
@@ -57,7 +58,7 @@ export default function SimpleTabs() {
       },
       date: 1572867571785
     }
-  ]);
+  ];
   return (
     <div className={classes.root}>
       <AppBar position="static">
