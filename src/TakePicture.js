@@ -29,9 +29,13 @@ export default function TakePicture() {
   const classes = useStyles();
   const webcamRef = useRef(null);
   const [provisionalPicture, setProvisionalPicture] = useState("");
-  const capture = useCallback(() => {
+  const [provisionalEmotionData, setProvisionalEmotionData] = useState({});
+  const capture = useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setProvisionalPicture(imageSrc);
+    const emotionData = await calculateEmotionData(imageSrc);
+    setProvisionalEmotionData(emotionData);
+    console.log("emotionData:", emotionData);
   }, [webcamRef]);
   return (
     <StyledTakePicture>
@@ -49,6 +53,7 @@ export default function TakePicture() {
       >
         <AddIcon onClick={capture} />
       </Fab>
+      <h1>{`${provisionalEmotionData.happiness}`}</h1>
       <Button
         onClick={e => calculateEmotionData(provisionalPicture)}
         variant="contained"

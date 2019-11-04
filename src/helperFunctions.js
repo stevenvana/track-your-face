@@ -26,21 +26,27 @@ async function calculateEmotionData(provisionalPicture) {
     const blob = await b64toBlob(provisionalPicture, contentType);
     const fData = new FormData();
     fData.append("image_file", blob);
-    const result = await axios.post(
-      "https://api-us.faceplusplus.com/facepp/v3/detect",
-      fData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        },
-        params: {
-          api_key: "8lb1wAluXKIn5fy87EZRk3poxNNMq1zw",
-          api_secret: "sYdXH5dYYpPWSknrzy3Kb6LUy-_lxATO",
-          return_attributes: "emotion"
-        }
-      }
+    // const result = await axios.post(
+    //   "https://api-us.faceplusplus.com/facepp/v3/detect",
+    //   fData,
+    //   {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data"
+    //     },
+    //     params: {
+    //       api_key: "8lb1wAluXKIn5fy87EZRk3poxNNMq1zw",
+    //       api_secret: "sYdXH5dYYpPWSknrzy3Kb6LUy-_lxATO",
+    //       return_attributes: "emotion"
+    //     }
+    //   }
+    // );
+    // return result.data.faces[0].attributes.emotion;
+
+    // temporary mock api in order to limit calls to real api with limited free calls
+    const result = await axios.get(
+      "https://ec4b5205-9d79-4cf7-960d-291e4bf15f1a.mock.pstmn.io/detect"
     );
-    return result;
+    return result.data.data.faces[0].attributes.emotion;
   } catch (error) {
     console.error(error);
     return error;
