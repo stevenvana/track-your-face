@@ -25,11 +25,14 @@ ProvisionalPicture.propTypes = {
   data: PropTypes.string.isRequired
 };
 
-export default function TakePicture() {
+export default function TakePicture(props) {
+  const { saveEmotionData } = props;
   const classes = useStyles();
   const webcamRef = useRef(null);
   const [provisionalPicture, setProvisionalPicture] = useState("");
-  const [provisionalEmotionData, setProvisionalEmotionData] = useState({});
+  const [provisionalEmotionData, setProvisionalEmotionData] = useState({
+    emotion: {}
+  });
   const capture = useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setProvisionalPicture(imageSrc);
@@ -53,15 +56,16 @@ export default function TakePicture() {
       >
         <AddIcon onClick={capture} />
       </Fab>
-      <h1>anger: {`${provisionalEmotionData.anger}`}</h1>
-      <h1>disgust: {`${provisionalEmotionData.disgust}`}</h1>
-      <h1>fear: {`${provisionalEmotionData.fear}`}</h1>
-      <h1>happiness: {`${provisionalEmotionData.happiness}`}</h1>
-      <h1>neutral: {`${provisionalEmotionData.neutral}`}</h1>
-      <h1>sadness: {`${provisionalEmotionData.sadness}`}</h1>
-      <h1>surprise: {`${provisionalEmotionData.surprise}`}</h1>
+      <h1>anger: {`${provisionalEmotionData.emotion.anger}`}</h1>
+      <h1>disgust: {`${provisionalEmotionData.emotion.disgust}`}</h1>
+      <h1>fear: {`${provisionalEmotionData.emotion.fear}`}</h1>
+      <h1>happiness: {`${provisionalEmotionData.emotion.happiness}`}</h1>
+      <h1>neutral: {`${provisionalEmotionData.emotion.neutral}`}</h1>
+      <h1>sadness: {`${provisionalEmotionData.emotion.sadness}`}</h1>
+      <h1>surprise: {`${provisionalEmotionData.emotion.surprise}`}</h1>
       <Button
-        onClick={e => calculateEmotionData(provisionalPicture)}
+        // onClick={e => calculateEmotionData(provisionalPicture)}
+        onClick={e => saveEmotionData(provisionalEmotionData)}
         variant="contained"
         className={classes.button}
       >

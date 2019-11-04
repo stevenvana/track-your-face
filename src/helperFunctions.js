@@ -46,7 +46,13 @@ async function calculateEmotionData(provisionalPicture) {
     const result = await axios.get(
       "https://ec4b5205-9d79-4cf7-960d-291e4bf15f1a.mock.pstmn.io/detect"
     );
-    return result.data.data.faces[0].attributes.emotion;
+    const date = Date.now();
+    const finalResult = {
+      emotion: result.data.data.faces[0].attributes.emotion,
+      date
+    };
+    console.log("finalResult:", finalResult);
+    return finalResult;
   } catch (error) {
     console.error(error);
     return error;

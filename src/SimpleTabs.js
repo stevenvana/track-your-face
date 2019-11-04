@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -20,8 +20,8 @@ export default function SimpleTabs() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  // const [emotionData, setEmotionData] = useState([
-  const emotionData = [
+  const [emotionData, setEmotionData] = useState([
+    // const emotionData = [
     {
       emotion: {
         sadness: 0.045,
@@ -58,7 +58,12 @@ export default function SimpleTabs() {
       },
       date: 1572867571785
     }
-  ];
+  ]);
+  function saveEmotionData(eData) {
+    setEmotionData(prevState => [...prevState, eData]);
+  }
+
+  console.log("emotionData:", emotionData);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -80,7 +85,7 @@ export default function SimpleTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <TakePicture />
+        <TakePicture saveEmotionData={saveEmotionData} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <DisplayGraph emotionData={emotionData} />
