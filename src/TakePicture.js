@@ -53,7 +53,13 @@ export default function TakePicture() {
       >
         <AddIcon onClick={capture} />
       </Fab>
-      <h1>{`${provisionalEmotionData.happiness}`}</h1>
+      <h1>anger: {`${provisionalEmotionData.anger}`}</h1>
+      <h1>disgust: {`${provisionalEmotionData.disgust}`}</h1>
+      <h1>fear: {`${provisionalEmotionData.fear}`}</h1>
+      <h1>happiness: {`${provisionalEmotionData.happiness}`}</h1>
+      <h1>neutral: {`${provisionalEmotionData.neutral}`}</h1>
+      <h1>sadness: {`${provisionalEmotionData.sadness}`}</h1>
+      <h1>surprise: {`${provisionalEmotionData.surprise}`}</h1>
       <Button
         onClick={e => calculateEmotionData(provisionalPicture)}
         variant="contained"
