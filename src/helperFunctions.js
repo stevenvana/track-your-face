@@ -51,7 +51,6 @@ async function calculateEmotionData(provisionalPicture) {
       emotion: result.data.data.faces[0].attributes.emotion,
       date
     };
-    console.log("finalResult:", finalResult);
     return finalResult;
   } catch (error) {
     console.error(error);

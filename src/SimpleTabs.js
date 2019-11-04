@@ -63,7 +63,6 @@ export default function SimpleTabs() {
     setEmotionData(prevState => [...prevState, eData]);
   }
 
-  console.log("emotionData:", emotionData);
   return (
     <div className={classes.root}>
       <AppBar position="static">

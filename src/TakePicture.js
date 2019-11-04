@@ -38,7 +38,6 @@ export default function TakePicture(props) {
     setProvisionalPicture(imageSrc);
     const emotionData = await calculateEmotionData(imageSrc);
     setProvisionalEmotionData(emotionData);
-    console.log("emotionData:", emotionData);
   }, [webcamRef]);
   return (
     <StyledTakePicture>
@@ -64,7 +63,6 @@ export default function TakePicture(props) {
       <h1>sadness: {`${provisionalEmotionData.emotion.sadness}`}</h1>
       <h1>surprise: {`${provisionalEmotionData.emotion.surprise}`}</h1>
       <Button
-        // onClick={e => calculateEmotionData(provisionalPicture)}
         onClick={e => saveEmotionData(provisionalEmotionData)}
         variant="contained"
         className={classes.button}
@@ -75,3 +73,7 @@ export default function TakePicture(props) {
     </StyledTakePicture>
   );
 }
+
+TakePicture.propTypes = {
+  saveEmotionData: PropTypes.func.isRequired
+};

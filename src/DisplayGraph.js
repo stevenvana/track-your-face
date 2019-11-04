@@ -6,39 +6,11 @@ import data from "./DisplayGraphData";
 
 export default function DisplayGraph(props) {
   const { emotionData } = props;
-  console.log("emotionData:", emotionData);
   const [lineGraphData, setLineGraphData] = useState(data);
-  // const [emData, setEmData] = useState(emotionData);
-  // function convertEDataToDGData(eData) {
-  //   console.log("eData:", eData);
-  //   const tempLabels = [];
-  //   const tempData = [[], [], [], [], [], [], []];
-  //   emData.forEach(measurement => {
-  //     console.log("in forEach");
-  //     tempLabels.push(moment(measurement.date).calendar());
-  //     tempData[0].push(measurement.emotion.anger);
-  //     tempData[1].push(measurement.emotion.disgust);
-  //     tempData[2].push(measurement.emotion.fear);
-  //     tempData[3].push(measurement.emotion.happiness);
-  //     tempData[4].push(measurement.emotion.neutral);
-  //     tempData[5].push(measurement.emotion.sadness);
-  //     tempData[6].push(measurement.emotion.surprise);
-  //   });
-  //   const tempDatasets = data.datasets.map((emotionObject, i) => {
-  //     return { ...emotionObject, data: tempData[i] };
-  //   });
-  //   const tempLineGraphData = {
-  //     ...data,
-  //     labels: tempLabels,
-  //     datasets: tempDatasets
-  //   };
-  //   setLineGraphData(tempLineGraphData);
-  // }
   const convertEDataToDGData = useCallback(() => {
     const tempLabels = [];
     const tempData = [[], [], [], [], [], [], []];
     emotionData.forEach(measurement => {
-      console.log("in forEach");
       tempLabels.push(moment(measurement.date).calendar());
       tempData[0].push(measurement.emotion.anger);
       tempData[1].push(measurement.emotion.disgust);
