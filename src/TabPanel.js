@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+import { StyledBox } from "./styled";
 
 export default function TabPanel(props) {
   const { value, index, children } = props;
@@ -14,7 +14,7 @@ export default function TabPanel(props) {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
     >
-      <Box p={3}>{children}</Box>
+      <StyledBox p={3}>{children}</StyledBox>
     </Typography>
   );
 }
@@ -22,5 +22,6 @@ export default function TabPanel(props) {
 TabPanel.propTypes = {
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
-  children: PropTypes.object.isRequired
+  // eslint-disable-next-line react/forbid-prop-types
+  children: PropTypes.any.isRequired
 };

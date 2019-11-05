@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabPanel from "./TabPanel";
 import TakePicture from "./TakePicture";
 import DisplayGraph from "./DisplayGraph";
+import { StyledAppBar } from "./styled";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -65,7 +65,7 @@ export default function SimpleTabs() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <StyledAppBar position="static">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -82,7 +82,7 @@ export default function SimpleTabs() {
             aria-controls="simple-tabpanel-1"
           />
         </Tabs>
-      </AppBar>
+      </StyledAppBar>
       <TabPanel value={value} index={0}>
         <TakePicture saveEmotionData={saveEmotionData} />
       </TabPanel>
