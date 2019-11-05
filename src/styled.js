@@ -34,19 +34,13 @@ const StyledProvisionalPicture = styled.div`
 `;
 
 const StyledEmotionPercentages = styled.div`
-  margin-left: 20px;
-  text-align: left;
-  @media (max-width: 850px) {
-    display: grid;
-    // grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-  @media (max-width: 500px) {
-    display: grid;
-    // grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-  }
   color: #ffffff;
+  background: #3f50b5;
+  border: 0px;
+  box-shadow: none;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 `;
 
 const StyledTakePicture = styled.div`

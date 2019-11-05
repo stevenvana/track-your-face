@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Webcam from "react-webcam";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
+import Modal from "@material-ui/core/Modal";
 import { calculateEmotionData } from "./helperFunctions";
 import {
   StyledProvisionalPicture,
@@ -18,6 +18,14 @@ const useStyles = makeStyles(theme => ({
   },
   extendedIcon: {
     marginRight: theme.spacing(1)
+  },
+  paper: {
+    position: "absolute",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
   }
 }));
 
@@ -30,6 +38,7 @@ export default function TakePicture(props) {
     emotion: {}
   });
   const [webcamHidden, setWebcamHidden] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const capture = useCallback(async () => {
     setWebcamHidden(true);
     const imageSrc = webcamRef.current.getScreenshot();
@@ -72,7 +81,7 @@ export default function TakePicture(props) {
                 variant="contained"
                 className={classes.button}
                 color="primary"
-                style={{ color: "#FFFFFF", margin: "5px" }}
+                // style={{ color: "#FFFFFF", margin: "5px" }}
               >
                 Add Picture To Graph
               </Button>
@@ -80,39 +89,64 @@ export default function TakePicture(props) {
                 onClick={e => setWebcamHidden(false)}
                 variant="contained"
                 className={classes.button}
-                style={{ margin: "5px" }}
+                // style={{ margin: "5px" }}
                 color="secondary"
               >
                 Discard Picture
               </Button>
+              <Button
+                onClick={e => setModalOpen(true)}
+                variant="contained"
+                className={classes.button}
+                color="primary"
+              >
+                Show Facial Emotion Data
+              </Button>
             </div>
+            <Modal
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              open={modalOpen}
+              onClose={e => setModalOpen(false)}
+            >
+              <StyledEmotionPercentages
+                style={{
+                  top: `50%`,
+                  left: `50%`,
+                  transform: `translate(-50%, -50%)`
+                }}
+                className={classes.paper}
+              >
+                <p>
+                  anger:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.anger)}%`}
+                </p>
+                <p>
+                  disgust:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.disgust)}%`}
+                </p>
+                <p>
+                  fear: {`${Math.round(provisionalEmotionData.emotion.fear)}%`}
+                </p>
+                <p>
+                  happiness:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.happiness)}%`}
+                </p>
+                <p>
+                  neutral:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.neutral)}%`}
+                </p>
+                <p>
+                  sadness:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.sadness)}%`}
+                </p>
+                <p>
+                  surprise:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.surprise)}%`}
+                </p>
+              </StyledEmotionPercentages>
+            </Modal>
           </div>
-          <StyledEmotionPercentages>
-            <p>
-              anger: {`${Math.round(provisionalEmotionData.emotion.anger)}%`}
-            </p>
-            <p>
-              disgust:{" "}
-              {`${Math.round(provisionalEmotionData.emotion.disgust)}%`}
-            </p>
-            <p>fear: {`${Math.round(provisionalEmotionData.emotion.fear)}%`}</p>
-            <p>
-              happiness:{" "}
-              {`${Math.round(provisionalEmotionData.emotion.happiness)}%`}
-            </p>
-            <p>
-              neutral:{" "}
-              {`${Math.round(provisionalEmotionData.emotion.neutral)}%`}
-            </p>
-            <p>
-              sadness:{" "}
-              {`${Math.round(provisionalEmotionData.emotion.sadness)}%`}
-            </p>
-            <p>
-              surprise:{" "}
-              {`${Math.round(provisionalEmotionData.emotion.surprise)}%`}
-            </p>
-          </StyledEmotionPercentages>
           <div />
         </StyledProvisionalPicture>
       )}

@@ -1,10 +1,10 @@
 import React from "react";
-import { StylesProvider } from '@material-ui/core/styles';
+import { StylesProvider } from "@material-ui/core/styles";
 import SimpleTabs from "./SimpleTabs";
 
 function App() {
   return (
-    <div className="App">
+    <div style={{ background: "#3f50b5", height: "100vh" }}>
       <StylesProvider injectFirst>
         <SimpleTabs />
       </StylesProvider>
