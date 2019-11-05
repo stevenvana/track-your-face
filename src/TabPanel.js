@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
-import { StyledBox } from "./styled";
+import { StyledBox, StyledTypography } from "./styled";
 
 export default function TabPanel(props) {
   const { value, index, children } = props;
 
   return (
-    <Typography
+    <StyledTypography
       component="div"
       role="tabpanel"
       hidden={value !== index}
@@ -15,7 +14,7 @@ export default function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
     >
       <StyledBox p={3}>{children}</StyledBox>
-    </Typography>
+    </StyledTypography>
   );
 }
 

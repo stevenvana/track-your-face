@@ -4,6 +4,13 @@ import Webcam from "react-webcam";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import { calculateEmotionData } from "./helperFunctions";
+import {
+  StyledProvisionalPicture,
+  StyledEmotionPercentages,
+  StyledTakePicture,
+  StyledWebcam,
+  StyledDisplayedProvisionalPicture
+} from "./styled";
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -33,12 +40,14 @@ export default function TakePicture(props) {
   return (
     <>
       {!webcamHidden ? (
-        <div>
-          <Webcam
+        <StyledTakePicture>
+          <StyledWebcam
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            // videoConstraints={videoConstraints}
+            videoConstraints={{
+              facingMode: "user"
+            }}
           />
           <div>
             <Button
@@ -50,20 +59,20 @@ export default function TakePicture(props) {
               Take picture
             </Button>
           </div>
-        </div>
+        </StyledTakePicture>
       ) : (
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <StyledProvisionalPicture>
           <div>
-            <div>
+            <StyledDisplayedProvisionalPicture>
               <img alt="provisionalPicture" src={provisionalPicture} />
-            </div>
+            </StyledDisplayedProvisionalPicture>
             <div>
               <Button
                 onClick={e => saveEmotionData(provisionalEmotionData)}
                 variant="contained"
                 className={classes.button}
                 color="primary"
-                style={{ margin: "5px" }}
+                style={{ color: "#FFFFFF", margin: "5px" }}
               >
                 Add Picture To Graph
               </Button>
@@ -78,7 +87,7 @@ export default function TakePicture(props) {
               </Button>
             </div>
           </div>
-          <div style={{ marginLeft: "20px", textAlign: "left" }}>
+          <StyledEmotionPercentages>
             <p>
               anger: {`${Math.round(provisionalEmotionData.emotion.anger)}%`}
             </p>
@@ -103,8 +112,9 @@ export default function TakePicture(props) {
               surprise:{" "}
               {`${Math.round(provisionalEmotionData.emotion.surprise)}%`}
             </p>
-          </div>
-        </div>
+          </StyledEmotionPercentages>
+          <div />
+        </StyledProvisionalPicture>
       )}
     </>
   );
