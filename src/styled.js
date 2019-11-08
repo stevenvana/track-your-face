@@ -4,6 +4,12 @@ import Box from "@material-ui/core/Box";
 import Webcam from "react-webcam";
 import Typography from "@material-ui/core/Typography";
 
+const StyledLoginPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+`;
 const StyledTypography = styled(Typography)`
   background: #3f50b5;
 `;
@@ -84,5 +90,6 @@ export {
   StyledTakePicture,
   StyledWebcam,
   StyledTypography,
-  StyledDisplayedProvisionalPicture
+  StyledDisplayedProvisionalPicture,
+  StyledLoginPage
 };

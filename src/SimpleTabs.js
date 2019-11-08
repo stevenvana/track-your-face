@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Button from "@material-ui/core/Button";
 import TabPanel from "./TabPanel";
 import TakePicture from "./TakePicture";
 import DisplayGraph from "./DisplayGraph";
@@ -14,7 +15,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SimpleTabs() {
+export default function SimpleTabs(props) {
+  const { signOut } = props;
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -82,6 +84,7 @@ export default function SimpleTabs() {
             aria-controls="simple-tabpanel-1"
           />
         </Tabs>
+        <Button onClick={signOut}>Sign out</Button>
       </StyledAppBar>
       <TabPanel value={value} index={0}>
         <TakePicture saveEmotionData={saveEmotionData} />
