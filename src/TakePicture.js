@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
-import { calculateEmotionData } from "./helperFunctions";
+import { calculateEmotionData } from "./models";
 import {
   StyledProvisionalPicture,
   StyledEmotionPercentages,

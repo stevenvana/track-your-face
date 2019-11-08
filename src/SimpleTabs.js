@@ -7,7 +7,7 @@ import TabPanel from "./TabPanel";
 import TakePicture from "./TakePicture";
 import DisplayGraph from "./DisplayGraph";
 import { StyledAppBar } from "./styled";
-import { getUserData } from "./helperFunctions";
+import { getUserData } from "./models";
 
 const useStyles = makeStyles(theme => ({
   root: {
