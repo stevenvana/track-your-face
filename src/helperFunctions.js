@@ -33,7 +33,6 @@ async function calculateEmotionData(provisionalPicture) {
     //     headers: {
     //       "Content-Type": "multipart/form-data"
     //     },
-    // CHANGE APIKEY AND APISECRET INTO NEW ONES THAT HAVE NOT BEEN PUSHED TO GITHUB
     //     params: {
     //       api_key: process.env.REACT_APP_FACEPLUPLUS_APIKEY,
     //       api_secret: process.env.REACT_APP_FACEPLUSPLUS_APISECRET,
