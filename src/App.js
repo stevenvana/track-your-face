@@ -1,6 +1,7 @@
 import React from "react";
 import { StylesProvider, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import PropTypes from "prop-types";
 
 import withFirebaseAuth from "react-with-firebase-auth";
 import * as firebase from "firebase/app";
@@ -9,7 +10,6 @@ import "firebase/auth";
 import firebaseConfig from "./firebaseConfig";
 
 import { StyledLoginPage } from "./styled";
-import PropTypes from "prop-types";
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
@@ -67,4 +67,19 @@ export default withFirebaseAuth({
   firebaseAppAuth
 })(App);
 
-// App.propTypes = { user, signOut, signInWithGoogle }
+App.propTypes = {
+  user: PropTypes.shape({
+    displayName: PropTypes.string,
+    emailVerified: PropTypes.bool,
+    metadata: PropTypes.shape({
+      A: PropTypes.func,
+      a: PropTypes.string,
+      b: PropTypes.string,
+      creationTime: PropTypes.string,
+      lastSignInTime: PropTypes.string
+    }),
+    uid: PropTypes.string.isRequired
+  }).isRequired,
+  signOut: PropTypes.func.isRequired,
+  signInWithGoogle: PropTypes.func.isRequired
+};
