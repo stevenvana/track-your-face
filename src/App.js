@@ -34,7 +34,7 @@ function App(props) {
     <div style={{ background: "#3f50b5", height: "100vh" }}>
       <StylesProvider injectFirst>
         {user ? (
-          <SimpleTabs signOut={signOut} />
+          <SimpleTabs signOut={signOut} user={user} />
         ) : (
           <StyledLoginPage>
             <p>Please sign in to Track Your Face.</p>

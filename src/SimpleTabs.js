@@ -17,7 +17,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SimpleTabs(props) {
-  const { signOut } = props;
+  const { signOut, user } = props;
+  const { uid } = user;
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -68,11 +69,13 @@ export default function SimpleTabs(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getUserData();
-      console.log("result:", result);
+      const result = await getUserData(uid);
+      // setEmotionData(result);
     };
     fetchData();
   });
+
+  console.log("emotionData:", emotionData);
 
   return (
     <div className={classes.root}>

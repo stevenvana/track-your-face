@@ -59,9 +59,13 @@ async function calculateEmotionData(provisionalPicture) {
   }
 }
 
-async function getUserData() {
-  const result = await db.collection("gebruikers").get();
-  const processedResult = result.docs.map(doc => doc.data());
+async function getUserData(uid) {
+  const result = await db
+    .collection("gebruikers")
+    .doc(uid)
+    .get();
+
+  const processedResult = result.data();
   return processedResult;
 }
 
