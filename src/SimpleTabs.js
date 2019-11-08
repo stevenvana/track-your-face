@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -7,6 +7,7 @@ import TabPanel from "./TabPanel";
 import TakePicture from "./TakePicture";
 import DisplayGraph from "./DisplayGraph";
 import { StyledAppBar } from "./styled";
+import { getUserData } from "./helperFunctions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,6 +65,14 @@ export default function SimpleTabs(props) {
   function saveEmotionData(eData) {
     setEmotionData(prevState => [...prevState, eData]);
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getUserData();
+      console.log("result:", result);
+    };
+    fetchData();
+  });
 
   return (
     <div className={classes.root}>

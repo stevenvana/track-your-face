@@ -1,4 +1,5 @@
 import axios from "axios";
+import { db } from "./firebase";
 
 const b64toBlob = (b64Data, contentType = "", sliceSize = 512) => {
   const slicedB64Data = b64Data.split(",")[1];
@@ -58,4 +59,10 @@ async function calculateEmotionData(provisionalPicture) {
   }
 }
 
-export { calculateEmotionData };
+async function getUserData() {
+  const result = await db.collection("gebruikers").get();
+  const processedResult = result.docs.map(doc => doc.data());
+  return processedResult;
+}
+
+export { calculateEmotionData, getUserData };

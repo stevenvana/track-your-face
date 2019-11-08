@@ -2,20 +2,12 @@ import React from "react";
 import { StylesProvider, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
-
 import withFirebaseAuth from "react-with-firebase-auth";
-import * as firebase from "firebase/app";
 import SimpleTabs from "./SimpleTabs";
-import "firebase/auth";
-import firebaseConfig from "./firebaseConfig";
-
 import { StyledLoginPage } from "./styled";
+import { firebaseApp, providers } from "./firebase";
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
-const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider()
-};
 
 const useStyles = makeStyles(theme => ({
   margin: {
