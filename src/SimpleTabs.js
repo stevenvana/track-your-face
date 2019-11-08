@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
+import PropTypes from "prop-types";
 import TabPanel from "./TabPanel";
 import TakePicture from "./TakePicture";
 import DisplayGraph from "./DisplayGraph";
@@ -68,3 +69,19 @@ export default function SimpleTabs(props) {
     </div>
   );
 }
+
+SimpleTabs.propTypes = {
+  user: PropTypes.shape({
+    displayName: PropTypes.string,
+    emailVerified: PropTypes.bool,
+    metadata: PropTypes.shape({
+      A: PropTypes.func,
+      a: PropTypes.string,
+      b: PropTypes.string,
+      creationTime: PropTypes.string,
+      lastSignInTime: PropTypes.string
+    }),
+    uid: PropTypes.string.isRequired
+  }).isRequired,
+  signOut: PropTypes.func.isRequired
+};
