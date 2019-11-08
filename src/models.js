@@ -55,18 +55,39 @@ async function calculateEmotionData(provisionalPicture) {
     return finalResult;
   } catch (error) {
     console.error(error);
-    return error;
+    throw error;
   }
 }
 
 async function getUserData(uid) {
-  const result = await db
-    .collection("gebruikers")
-    .doc(uid)
-    .get();
+  try {
+    const result = await db
+      .collection("users")
+      .doc(uid)
+      .collection("emotion-objects")
+      .get();
 
-  const processedResult = result.data();
-  return processedResult;
+    const processedResult = result.docs.map(doc => doc.data());
+    return processedResult;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
-export { calculateEmotionData, getUserData };
+async function saveUserData(uid, emotionObject) {
+  try {
+    const result = await db
+      .collection("users")
+      .doc(uid)
+      .collection("emotion-objects")
+      .doc(`${emotionObject.date}`)
+      .set(emotionObject);
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export { calculateEmotionData, getUserData, saveUserData };
