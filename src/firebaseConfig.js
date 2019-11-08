@@ -1,5 +1,5 @@
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_APIKEY,
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: "track-your-face-982cc.firebaseapp.com",
   databaseURL: "https://track-your-face-982cc.firebaseio.com",
   projectId: "track-your-face-982cc",
