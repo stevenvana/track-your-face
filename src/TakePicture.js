@@ -37,14 +37,26 @@ export default function TakePicture(props) {
   const [provisionalEmotionData, setProvisionalEmotionData] = useState({
     emotion: {}
   });
+  const [errorMessage, setErrorMessage] = useState("");
   const [webcamHidden, setWebcamHidden] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
   const capture = useCallback(async () => {
-    setWebcamHidden(true);
-    const imageSrc = webcamRef.current.getScreenshot();
-    setProvisionalPicture(imageSrc);
-    const emotionData = await calculateEmotionData(imageSrc);
-    setProvisionalEmotionData(emotionData);
+    try {
+      const imageSrc = webcamRef.current.getScreenshot();
+      setProvisionalPicture(imageSrc);
+      const emotionData = await calculateEmotionData(imageSrc);
+      // console.log("emotionData:", emotionData);
+      if (emotionData.success) {
+        setWebcamHidden(true);
+        setProvisionalEmotionData(emotionData);
+      } else {
+        setErrorMessage(emotionData.errorMessage);
+        setErrorModalOpen(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }, [webcamRef]);
   return (
     <>
@@ -68,6 +80,26 @@ export default function TakePicture(props) {
               Take picture
             </Button>
           </div>
+
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={errorModalOpen}
+            onClose={e => {
+              setErrorModalOpen(false);
+            }}
+          >
+            <StyledEmotionPercentages
+              style={{
+                top: `50%`,
+                left: `50%`,
+                transform: `translate(-50%, -50%)`
+              }}
+              className={classes.paper}
+            >
+              <p>{errorMessage}</p>
+            </StyledEmotionPercentages>
+          </Modal>
         </StyledTakePicture>
       ) : (
         <StyledProvisionalPicture>
@@ -103,11 +135,14 @@ export default function TakePicture(props) {
                 Show Facial Emotion Data
               </Button>
             </div>
+
             <Modal
               aria-labelledby="simple-modal-title"
               aria-describedby="simple-modal-description"
               open={modalOpen}
-              onClose={e => setModalOpen(false)}
+              onClose={e => {
+                setModalOpen(false);
+              }}
             >
               <StyledEmotionPercentages
                 style={{

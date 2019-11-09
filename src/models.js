@@ -42,13 +42,16 @@ async function calculateEmotionData(provisionalPicture) {
       }
     );
     const date = Date.now();
-    let finalResult;
+    let finalResult = {};
     if (result.data.faces.length === 0) {
-      finalResult = "No face was recognized.";
+      finalResult.success = false;
+      finalResult.errorMessage = "No face was recognized.";
     } else if (result.data.faces.length > 1) {
-      finalResult = "Please provide your face and your face only!";
+      finalResult.success = false;
+      finalResult.errorMessage = "Please provide your face and your face only!";
     } else {
       finalResult = {
+        success: true,
         emotion: result.data.faces[0].attributes.emotion,
         date
       };
