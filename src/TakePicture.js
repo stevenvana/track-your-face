@@ -58,6 +58,7 @@ export default function TakePicture(props) {
       console.error(error);
     }
   }, [webcamRef]);
+  console.log("webcamRef:", webcamRef);
   return (
     <>
       {!webcamHidden ? (
@@ -66,6 +67,8 @@ export default function TakePicture(props) {
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
+            height="20px"
+            width="20px"
             videoConstraints={{
               facingMode: "user"
             }}

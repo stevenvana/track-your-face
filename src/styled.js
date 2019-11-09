@@ -25,8 +25,6 @@ const StyledBox = styled(Box)`
 
 const StyledProvisionalPicture = styled.div`
   position: absolute;
-  // top: 0;
-  // bottom: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -51,8 +49,6 @@ const StyledEmotionPercentages = styled.div`
 
 const StyledTakePicture = styled.div`
   position: absolute;
-  // top: 0;
-  // bottom: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -76,11 +72,13 @@ const StyledWebcam = styled(Webcam)`
 
 const StyledDisplayedProvisionalPicture = styled.div`
   position: absolute;
-  // top: 0;
-  // bottom: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 export {
   StyledAppBar,
