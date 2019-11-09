@@ -21,9 +21,9 @@ export default function SimpleTabs(props) {
   const { signOut, user } = props;
   const { uid } = user;
   const classes = useStyles();
-  const [value, setValue] = useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const [tabValue, setTabValue] = useState(0);
+  const changeTabs = (event, newTabValue) => {
+    setTabValue(newTabValue);
   };
   const [emotionData, setEmotionData] = useState([]);
   function saveEmotionData(eData) {
@@ -43,8 +43,8 @@ export default function SimpleTabs(props) {
     <div className={classes.root}>
       <StyledAppBar position="static">
         <Tabs
-          value={value}
-          onChange={handleChange}
+          value={tabValue}
+          onChange={changeTabs}
           aria-label="simple tabs example"
         >
           <Tab
@@ -60,10 +60,13 @@ export default function SimpleTabs(props) {
         </Tabs>
         <Button onClick={signOut}>Sign out</Button>
       </StyledAppBar>
-      <TabPanel value={value} index={0}>
-        <TakePicture saveEmotionData={saveEmotionData} />
+      <TabPanel value={tabValue} index={0}>
+        <TakePicture
+          saveEmotionData={saveEmotionData}
+          changeTabs={changeTabs}
+        />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={tabValue} index={1}>
         <DisplayGraph emotionData={emotionData} />
       </TabPanel>
     </div>

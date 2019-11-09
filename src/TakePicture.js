@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function TakePicture(props) {
-  const { saveEmotionData } = props;
+  const { saveEmotionData, changeTabs } = props;
   const classes = useStyles();
   const webcamRef = useRef(null);
   const [provisionalPicture, setProvisionalPicture] = useState("");
@@ -109,7 +109,11 @@ export default function TakePicture(props) {
             </StyledDisplayedProvisionalPicture>
             <div>
               <Button
-                onClick={e => saveEmotionData(provisionalEmotionData)}
+                onClick={e => {
+                  saveEmotionData(provisionalEmotionData);
+                  setWebcamHidden(false);
+                  changeTabs(e, 1);
+                }}
                 variant="contained"
                 className={classes.button}
                 color="primary"
