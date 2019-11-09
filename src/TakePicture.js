@@ -194,5 +194,6 @@ export default function TakePicture(props) {
 }
 
 TakePicture.propTypes = {
-  saveEmotionData: PropTypes.func.isRequired
+  saveEmotionData: PropTypes.func.isRequired,
+  changeTabs: PropTypes.func.isRequired
 };
