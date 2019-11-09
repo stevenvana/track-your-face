@@ -53,7 +53,6 @@ function App(props) {
   );
 }
 
-// export default App;
 export default withFirebaseAuth({
   providers,
   firebaseAppAuth
@@ -71,7 +70,21 @@ App.propTypes = {
       lastSignInTime: PropTypes.string
     }),
     uid: PropTypes.string.isRequired
-  }).isRequired,
+  }),
   signOut: PropTypes.func.isRequired,
   signInWithGoogle: PropTypes.func.isRequired
+};
+
+App.defaultProps = {
+  user: {
+    displayName: "Dummy User",
+    emailVerified: true,
+    metadata: {
+      a: "1573209113041",
+      b: "1573245230365",
+      creationTime: "Fri, 08 Nov 2019 10:31:53",
+      lastSignInTime: "Fri, 08 Nov 2019"
+    },
+    uid: "5kanNRnKTwhLbaWQFH1ccpvoyRw4"
+  }
 };

@@ -27,36 +27,32 @@ async function calculateEmotionData(provisionalPicture) {
     const blob = await b64toBlob(provisionalPicture, contentType);
     const fData = new FormData();
     fData.append("image_file", blob);
-    //     const result = await axios.post(
-    //       "https://api-us.faceplusplus.com/facepp/v3/detect",
-    //       fData,
-    //       {
-    //         headers: {
-    //           "Content-Type": "multipart/form-data"
-    //         },
-    //         params: {
-    //           api_key: process.env.REACT_APP_FACEPLUSPLUS_APIKEY,
-    //           api_secret: process.env.REACT_APP_FACEPLUSPLUS_APISECRET,
-    //           return_attributes: "emotion"
-    //         }
-    //       }
-    //     );
-    //     const date = Date.now();
-    //     const finalResult = {
-    //       emotion: result.data.faces[0].attributes.emotion,
-    //       date
-    //     };
-    //     return finalResult;
-
-    // temporary mock api in order to limit calls to real api with limited free calls
-    const result = await axios.get(
-      "https://ec4b5205-9d79-4cf7-960d-291e4bf15f1a.mock.pstmn.io/detect"
+    const result = await axios.post(
+      "https://api-us.faceplusplus.com/facepp/v3/detect",
+      fData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        params: {
+          api_key: process.env.REACT_APP_FACEPLUSPLUS_APIKEY,
+          api_secret: process.env.REACT_APP_FACEPLUSPLUS_APISECRET,
+          return_attributes: "emotion"
+        }
+      }
     );
     const date = Date.now();
-    const finalResult = {
-      emotion: result.data.data.faces[0].attributes.emotion,
-      date
-    };
+    let finalResult;
+    if (result.data.faces.length === 0) {
+      finalResult = "No face was recognized.";
+    } else if (result.data.faces.length > 1) {
+      finalResult = "Please provide your face and your face only!";
+    } else {
+      finalResult = {
+        emotion: result.data.faces[0].attributes.emotion,
+        date
+      };
+    }
     return finalResult;
   } catch (error) {
     console.error(error);
