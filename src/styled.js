@@ -5,6 +5,12 @@ import Webcam from "react-webcam";
 import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
 
+const StyledMenu = styled.div`
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+`;
 const StyledFab = styled(Fab)`
   position: fixed;
   bottom: 3vh;
@@ -105,5 +111,6 @@ export {
   StyledWebcam,
   StyledTypography,
   StyledDisplayedProvisionalPicture,
-  StyledLoginPage
+  StyledLoginPage,
+  StyledMenu
 };

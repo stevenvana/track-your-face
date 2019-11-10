@@ -31,7 +31,7 @@ function App(props) {
   const classes = useStyles();
 
   return (
-    <div style={{ background: "#3f50b5", height: "100vh" }}>
+    <div>
       <StylesProvider injectFirst>
         {user ? (
           <SimpleTabs signOut={signOut} user={user} />

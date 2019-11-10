@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import TabPanel from "./TabPanel";
+import { faSignOutAlt, faBars } from "@fortawesome/free-solid-svg-icons";
 import TakePicture from "./TakePicture";
 import DisplayGraph from "./DisplayGraph";
-import { StyledAppBar, StyledSimpleTabs } from "./styled";
+import { StyledMenu, StyledSimpleTabs } from "./styled";
 import { getUserData, saveUserData } from "./models";
 
 const useStyles = makeStyles(theme => ({
@@ -20,21 +19,32 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper
   }
 }));
-library.add(fab, faSignOutAlt);
+library.add(fab, faSignOutAlt, faBars);
 
 export default function SimpleTabs(props) {
   const { signOut, user } = props;
   const { uid } = user;
   const classes = useStyles();
-  const [tabValue, setTabValue] = useState(0);
-  const changeTabs = (event, newTabValue) => {
-    setTabValue(newTabValue);
+  // const [tabValue, setTabValue] = useState(0);
+  const [takePicture, setTakePicture] = useState(true);
+  const changePage = (event, bool) => {
+    setTakePicture(bool);
   };
   const [emotionData, setEmotionData] = useState([]);
   function saveEmotionData(eData) {
     setEmotionData(prevState => [...prevState, eData]);
     saveUserData(uid, eData);
   }
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,47 +57,50 @@ export default function SimpleTabs(props) {
   return (
     <StyledSimpleTabs>
       {/* // <div className={classes.root}> */}
-      <StyledAppBar position="static">
-        <Tabs
-          value={tabValue}
-          onChange={changeTabs}
-          aria-label="simple tabs example"
+
+      <StyledMenu>
+        <Button
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
         >
-          <Tab
-            label="Take your picture"
-            id="simple-tab-0"
-            aria-controls="simple-tabpanel-0"
-          />
-          <Tab
-            label="Show graph"
-            id="simple-tab-1"
-            aria-controls="simple-tabpanel-1"
-          />
-          <Button
-            color="primary"
-            // size="small"
-            style={{
-              color: "#FFFFFF",
-              position: "fixed",
-              right: "0vw",
-              top: "2vw"
+          {/* Open Menu */}
+          <FontAwesomeIcon icon="bars" />
+        </Button>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem
+            onClick={e => {
+              changePage(e, true);
             }}
-            onClick={signOut}
           >
-            {/* Sign out */}
-            <FontAwesomeIcon icon="sign-out-alt" />
-          </Button>
-        </Tabs>
-      </StyledAppBar>
-      <TabPanel value={tabValue} index={0}>
+            Take Your Picture
+          </MenuItem>
+          <MenuItem
+            onClick={e => {
+              changePage(e, false);
+            }}
+          >
+            Show Graph
+          </MenuItem>
+          <MenuItem onClick={signOut}>
+            Sign Out <FontAwesomeIcon icon="sign-out-alt" />
+          </MenuItem>
+        </Menu>
+      </StyledMenu>
+      {takePicture ? (
         <TakePicture
           saveEmotionData={saveEmotionData}
-          changeTabs={changeTabs}
+          changePage={changePage}
         />
-      </TabPanel>
-      <TabPanel value={tabValue} index={1}>
+      ) : (
         <DisplayGraph emotionData={emotionData} />
-      </TabPanel>
+      )}
     </StyledSimpleTabs>
   );
 }

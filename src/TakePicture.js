@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function TakePicture(props) {
-  const { saveEmotionData, changeTabs } = props;
+  const { saveEmotionData, changePage } = props;
   const classes = useStyles();
   const webcamRef = useRef(null);
   const [provisionalPicture, setProvisionalPicture] = useState("");
@@ -67,7 +67,6 @@ export default function TakePicture(props) {
       console.error(error);
     }
   }, [webcamRef]);
-  console.log("webcamRef:", webcamRef);
   return (
     <>
       {!webcamHidden ? (
@@ -133,7 +132,7 @@ export default function TakePicture(props) {
                 onClick={e => {
                   saveEmotionData(provisionalEmotionData);
                   setWebcamHidden(false);
-                  changeTabs(e, 1);
+                  changePage(e, false);
                 }}
                 variant="contained"
                 className={classes.button}
@@ -216,5 +215,5 @@ export default function TakePicture(props) {
 
 TakePicture.propTypes = {
   saveEmotionData: PropTypes.func.isRequired,
-  changeTabs: PropTypes.func.isRequired
+  changePage: PropTypes.func.isRequired
 };
