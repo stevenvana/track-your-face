@@ -55,7 +55,6 @@ export default function TakePicture(props) {
       const imageSrc = webcamRef.current.getScreenshot();
       setProvisionalPicture(imageSrc);
       const emotionData = await calculateEmotionData(imageSrc);
-      // console.log("emotionData:", emotionData);
       if (emotionData.success) {
         setWebcamHidden(true);
         setProvisionalEmotionData(emotionData);
@@ -71,7 +70,6 @@ export default function TakePicture(props) {
     <>
       {!webcamHidden ? (
         <StyledTakePicture>
-          {/* <div style={{ position: "relative" }}> */}
           <StyledWebcam
             audio={false}
             ref={webcamRef}
@@ -82,14 +80,6 @@ export default function TakePicture(props) {
               facingMode: "user"
             }}
           />
-          {/* <div> */}
-          {/* <Button
-              onClick={capture}
-              variant="contained"
-              className={classes.button}
-              color="primary"
-            > */}
-          {/* <div /> */}
           <StyledFab
             onClick={capture}
             color="primary"
@@ -98,8 +88,6 @@ export default function TakePicture(props) {
           >
             <FontAwesomeIcon icon="camera" />
           </StyledFab>
-          {/* </div> */}
-          {/* </div> */}
 
           <Modal
             aria-labelledby="simple-modal-title"
@@ -137,7 +125,6 @@ export default function TakePicture(props) {
                 variant="contained"
                 className={classes.button}
                 color="primary"
-                // style={{ color: "#FFFFFF", margin: "5px" }}
               >
                 Add Picture To Graph
               </Button>
@@ -145,7 +132,6 @@ export default function TakePicture(props) {
                 onClick={e => setWebcamHidden(false)}
                 variant="contained"
                 className={classes.button}
-                // style={{ margin: "5px" }}
                 color="secondary"
               >
                 Discard Picture
