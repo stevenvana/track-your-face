@@ -35,7 +35,6 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
   }
-  // fab:
 }));
 
 export default function TakePicture(props) {
@@ -80,12 +79,7 @@ export default function TakePicture(props) {
               facingMode: "user"
             }}
           />
-          <StyledFab
-            onClick={capture}
-            color="primary"
-            aria-label="add"
-            // className={classes.fab}
-          >
+          <StyledFab onClick={capture} color="primary" aria-label="add">
             <FontAwesomeIcon icon="camera" />
           </StyledFab>
 

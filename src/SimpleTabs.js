@@ -73,24 +73,27 @@ export default function SimpleTabs(props) {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem
-            // style={{ backgroundColor: "#3f51b5", color: "#FFF" }}
-            style={{ color: "#3f51b5" }}
-            onClick={e => {
-              changePage(e, true);
-            }}
-          >
-            Take Your Picture
-          </MenuItem>
-          <MenuItem
-            // style={{ backgroundColor: "#3f51b5", color: "#FFF" }}
-            style={{ color: "#3f51b5" }}
-            onClick={e => {
-              changePage(e, false);
-            }}
-          >
-            Show Graph
-          </MenuItem>
+          {!takePicture ? (
+            <MenuItem
+              // style={{ backgroundColor: "#3f51b5", color: "#FFF" }}
+              style={{ color: "#3f51b5" }}
+              onClick={e => {
+                changePage(e, true);
+              }}
+            >
+              Take Your Picture
+            </MenuItem>
+          ) : (
+            <MenuItem
+              // style={{ backgroundColor: "#3f51b5", color: "#FFF" }}
+              style={{ color: "#3f51b5" }}
+              onClick={e => {
+                changePage(e, false);
+              }}
+            >
+              Show Graph
+            </MenuItem>
+          )}
           <MenuItem
             // style={{ backgroundColor: "#3f51b5", color: "#FFF" }}
             style={{ color: "#3f51b5" }}
@@ -110,7 +113,7 @@ export default function SimpleTabs(props) {
           changePage={changePage}
         />
       ) : (
-        <DisplayGraph emotionData={emotionData} />
+        <DisplayGraph emotionData={emotionData} changePage={changePage} />
       )}
     </StyledSimpleTabs>
   );
