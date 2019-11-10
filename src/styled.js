@@ -70,8 +70,8 @@ const StyledTakePicture = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  // display: grid;
-  // grid-template-rows: 90% 10%;
+  display: flex;
+  justify-content: center;
 `;
 
 const StyledWebcam = styled(Webcam)`
