@@ -4,8 +4,13 @@ import Box from "@material-ui/core/Box";
 import Webcam from "react-webcam";
 import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
+import Menu from "@material-ui/core/Menu";
 
-const StyledMenu = styled.div`
+const StyledMenu = styled(Menu)`
+  // background: transparent;
+  // background-color: #3f51b5;
+`;
+const StyledMenuDiv = styled.div`
   position: fixed;
   top: 0px;
   right: 0px;
@@ -112,5 +117,6 @@ export {
   StyledTypography,
   StyledDisplayedProvisionalPicture,
   StyledLoginPage,
+  StyledMenuDiv,
   StyledMenu
 };

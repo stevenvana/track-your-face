@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Menu from "@material-ui/core/Menu";
+import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -10,7 +10,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faSignOutAlt, faBars } from "@fortawesome/free-solid-svg-icons";
 import TakePicture from "./TakePicture";
 import DisplayGraph from "./DisplayGraph";
-import { StyledMenu, StyledSimpleTabs } from "./styled";
+import { StyledMenu, StyledSimpleTabs, StyledMenuDiv } from "./styled";
 import { getUserData, saveUserData } from "./models";
 
 const useStyles = makeStyles(theme => ({
@@ -56,25 +56,26 @@ export default function SimpleTabs(props) {
 
   return (
     <StyledSimpleTabs>
-      {/* // <div className={classes.root}> */}
-
-      <StyledMenu>
-        <Button
-          aria-controls="simple-menu"
-          aria-haspopup="true"
+      <StyledMenuDiv>
+        <IconButton
+          edge="start"
+          className={classes.menuButton}
+          color="primary"
+          aria-label="menu"
           onClick={handleClick}
         >
-          {/* Open Menu */}
-          <FontAwesomeIcon icon="bars" />
-        </Button>
-        <Menu
-          id="simple-menu"
+          <MenuIcon />
+        </IconButton>
+        <StyledMenu
+          // id="simple-menu"
           anchorEl={anchorEl}
-          keepMounted
+          // keepMounted
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
           <MenuItem
+            // style={{ backgroundColor: "#3f51b5", color: "#FFF" }}
+            style={{ color: "#3f51b5" }}
             onClick={e => {
               changePage(e, true);
             }}
@@ -82,17 +83,27 @@ export default function SimpleTabs(props) {
             Take Your Picture
           </MenuItem>
           <MenuItem
+            // style={{ backgroundColor: "#3f51b5", color: "#FFF" }}
+            style={{ color: "#3f51b5" }}
             onClick={e => {
               changePage(e, false);
             }}
           >
             Show Graph
           </MenuItem>
-          <MenuItem onClick={signOut}>
-            Sign Out <FontAwesomeIcon icon="sign-out-alt" />
+          <MenuItem
+            // style={{ backgroundColor: "#3f51b5", color: "#FFF" }}
+            style={{ color: "#3f51b5" }}
+            onClick={signOut}
+          >
+            Sign Out{" "}
+            <FontAwesomeIcon
+              style={{ marginLeft: "10px" }}
+              icon="sign-out-alt"
+            />
           </MenuItem>
-        </Menu>
-      </StyledMenu>
+        </StyledMenu>
+      </StyledMenuDiv>
       {takePicture ? (
         <TakePicture
           saveEmotionData={saveEmotionData}
