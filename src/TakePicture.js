@@ -2,7 +2,13 @@ import React, { useState, useCallback, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
 import Modal from "@material-ui/core/Modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { calculateEmotionData } from "./models";
 import {
   StyledProvisionalPicture,
@@ -11,6 +17,8 @@ import {
   StyledWebcam,
   StyledDisplayedProvisionalPicture
 } from "./styled";
+
+library.add(fab, faCamera);
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -63,6 +71,7 @@ export default function TakePicture(props) {
     <>
       {!webcamHidden ? (
         <StyledTakePicture>
+          {/* <div style={{ position: "relative" }}> */}
           <StyledWebcam
             audio={false}
             ref={webcamRef}
@@ -73,16 +82,23 @@ export default function TakePicture(props) {
               facingMode: "user"
             }}
           />
-          <div>
-            <Button
+          {/* <div> */}
+          {/* <Button
               onClick={capture}
               variant="contained"
               className={classes.button}
               color="primary"
-            >
-              Take picture
-            </Button>
-          </div>
+            > */}
+          <Fab
+            onClick={capture}
+            color="primary"
+            aria-label="add"
+            // className={classes.fab}
+          >
+            <FontAwesomeIcon icon="camera" />
+          </Fab>
+          {/* </div> */}
+          {/* </div> */}
 
           <Modal
             aria-labelledby="simple-modal-title"
