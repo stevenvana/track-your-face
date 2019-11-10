@@ -14,8 +14,8 @@ import {
   StyledEmotionPercentages,
   StyledTakePicture,
   StyledWebcam,
-  StyledDisplayedProvisionalPicture,
-  StyledFab
+  StyledFab,
+  StyledImg
 } from "./styled";
 
 library.add(fab, faCamera);
@@ -111,88 +111,82 @@ export default function TakePicture(props) {
         </StyledTakePicture>
       ) : (
         <StyledProvisionalPicture>
+          <StyledImg alt="provisionalPicture" src={provisionalPicture} />
           <div>
-            <StyledDisplayedProvisionalPicture>
-              <img alt="provisionalPicture" src={provisionalPicture} />
-            </StyledDisplayedProvisionalPicture>
-            <div>
-              <Button
-                onClick={e => {
-                  saveEmotionData(provisionalEmotionData);
-                  setWebcamHidden(false);
-                  changePage(e, false);
-                }}
-                variant="contained"
-                className={classes.button}
-                color="primary"
-              >
-                Add Picture To Graph
-              </Button>
-              <Button
-                onClick={e => setWebcamHidden(false)}
-                variant="contained"
-                className={classes.button}
-                color="secondary"
-              >
-                Discard Picture
-              </Button>
-              <Button
-                onClick={e => setModalOpen(true)}
-                variant="contained"
-                className={classes.button}
-                color="primary"
-              >
-                Show Facial Emotion Data
-              </Button>
-            </div>
-
-            <Modal
-              aria-labelledby="simple-modal-title"
-              aria-describedby="simple-modal-description"
-              open={modalOpen}
-              onClose={e => {
-                setModalOpen(false);
+            <Button
+              onClick={e => {
+                saveEmotionData(provisionalEmotionData);
+                setWebcamHidden(false);
+                changePage(e, false);
               }}
+              variant="contained"
+              className={classes.button}
+              color="primary"
             >
-              <StyledEmotionPercentages
-                style={{
-                  top: `50%`,
-                  left: `50%`,
-                  transform: `translate(-50%, -50%)`
-                }}
-                className={classes.paper}
-              >
-                <p>
-                  anger:{" "}
-                  {`${Math.round(provisionalEmotionData.emotion.anger)}%`}
-                </p>
-                <p>
-                  disgust:{" "}
-                  {`${Math.round(provisionalEmotionData.emotion.disgust)}%`}
-                </p>
-                <p>
-                  fear: {`${Math.round(provisionalEmotionData.emotion.fear)}%`}
-                </p>
-                <p>
-                  happiness:{" "}
-                  {`${Math.round(provisionalEmotionData.emotion.happiness)}%`}
-                </p>
-                <p>
-                  neutral:{" "}
-                  {`${Math.round(provisionalEmotionData.emotion.neutral)}%`}
-                </p>
-                <p>
-                  sadness:{" "}
-                  {`${Math.round(provisionalEmotionData.emotion.sadness)}%`}
-                </p>
-                <p>
-                  surprise:{" "}
-                  {`${Math.round(provisionalEmotionData.emotion.surprise)}%`}
-                </p>
-              </StyledEmotionPercentages>
-            </Modal>
+              Add Picture To Graph
+            </Button>
+            <Button
+              onClick={e => setWebcamHidden(false)}
+              variant="contained"
+              className={classes.button}
+              color="secondary"
+            >
+              Discard Picture
+            </Button>
+            <Button
+              onClick={e => setModalOpen(true)}
+              variant="contained"
+              className={classes.button}
+              color="primary"
+            >
+              Show Facial Emotion Data
+            </Button>
           </div>
-          <div />
+
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={modalOpen}
+            onClose={e => {
+              setModalOpen(false);
+            }}
+          >
+            <StyledEmotionPercentages
+              style={{
+                top: `50%`,
+                left: `50%`,
+                transform: `translate(-50%, -50%)`
+              }}
+              className={classes.paper}
+            >
+              <p>
+                anger: {`${Math.round(provisionalEmotionData.emotion.anger)}%`}
+              </p>
+              <p>
+                disgust:{" "}
+                {`${Math.round(provisionalEmotionData.emotion.disgust)}%`}
+              </p>
+              <p>
+                fear: {`${Math.round(provisionalEmotionData.emotion.fear)}%`}
+              </p>
+              <p>
+                happiness:{" "}
+                {`${Math.round(provisionalEmotionData.emotion.happiness)}%`}
+              </p>
+              <p>
+                neutral:{" "}
+                {`${Math.round(provisionalEmotionData.emotion.neutral)}%`}
+              </p>
+              <p>
+                sadness:{" "}
+                {`${Math.round(provisionalEmotionData.emotion.sadness)}%`}
+              </p>
+              <p>
+                surprise:{" "}
+                {`${Math.round(provisionalEmotionData.emotion.surprise)}%`}
+              </p>
+            </StyledEmotionPercentages>
+          </Modal>
         </StyledProvisionalPicture>
       )}
     </>

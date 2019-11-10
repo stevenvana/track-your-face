@@ -95,7 +95,7 @@ const StyledWebcam = styled(Webcam)`
   transform: translate(-50%, -50%);
 `;
 
-const StyledDisplayedProvisionalPicture = styled.div`
+const StyledImg = styled.img`
   position: absolute;
   min-width: 100%;
   min-height: 100%;
@@ -115,8 +115,8 @@ export {
   StyledTakePicture,
   StyledWebcam,
   StyledTypography,
-  StyledDisplayedProvisionalPicture,
   StyledLoginPage,
   StyledMenuDiv,
-  StyledMenu
+  StyledMenu,
+  StyledImg
 };
