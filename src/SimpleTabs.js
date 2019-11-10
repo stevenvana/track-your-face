@@ -4,10 +4,14 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import TabPanel from "./TabPanel";
 import TakePicture from "./TakePicture";
 import DisplayGraph from "./DisplayGraph";
-import { StyledAppBar } from "./styled";
+import { StyledAppBar, StyledSimpleTabs } from "./styled";
 import { getUserData, saveUserData } from "./models";
 
 const useStyles = makeStyles(theme => ({
@@ -16,6 +20,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper
   }
 }));
+library.add(fab, faSignOutAlt);
 
 export default function SimpleTabs(props) {
   const { signOut, user } = props;
@@ -40,7 +45,8 @@ export default function SimpleTabs(props) {
   }, [uid]);
 
   return (
-    <div className={classes.root}>
+    <StyledSimpleTabs>
+      {/* // <div className={classes.root}> */}
       <StyledAppBar position="static">
         <Tabs
           value={tabValue}
@@ -57,8 +63,21 @@ export default function SimpleTabs(props) {
             id="simple-tab-1"
             aria-controls="simple-tabpanel-1"
           />
+          <Button
+            color="primary"
+            // size="small"
+            style={{
+              color: "#FFFFFF",
+              position: "fixed",
+              right: "0vw",
+              top: "2vw"
+            }}
+            onClick={signOut}
+          >
+            {/* Sign out */}
+            <FontAwesomeIcon icon="sign-out-alt" />
+          </Button>
         </Tabs>
-        <Button onClick={signOut}>Sign out</Button>
       </StyledAppBar>
       <TabPanel value={tabValue} index={0}>
         <TakePicture
@@ -69,7 +88,7 @@ export default function SimpleTabs(props) {
       <TabPanel value={tabValue} index={1}>
         <DisplayGraph emotionData={emotionData} />
       </TabPanel>
-    </div>
+    </StyledSimpleTabs>
   );
 }
 

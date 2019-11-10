@@ -2,7 +2,6 @@ import React, { useState, useCallback, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
-import Fab from "@material-ui/core/Fab";
 import Modal from "@material-ui/core/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -15,7 +14,8 @@ import {
   StyledEmotionPercentages,
   StyledTakePicture,
   StyledWebcam,
-  StyledDisplayedProvisionalPicture
+  StyledDisplayedProvisionalPicture,
+  StyledFab
 } from "./styled";
 
 library.add(fab, faCamera);
@@ -35,6 +35,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
   }
+  // fab:
 }));
 
 export default function TakePicture(props) {
@@ -89,14 +90,15 @@ export default function TakePicture(props) {
               className={classes.button}
               color="primary"
             > */}
-          <Fab
+          {/* <div /> */}
+          <StyledFab
             onClick={capture}
             color="primary"
             aria-label="add"
             // className={classes.fab}
           >
             <FontAwesomeIcon icon="camera" />
-          </Fab>
+          </StyledFab>
           {/* </div> */}
           {/* </div> */}
 

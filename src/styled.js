@@ -3,12 +3,24 @@ import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
 import Webcam from "react-webcam";
 import Typography from "@material-ui/core/Typography";
+import Fab from "@material-ui/core/Fab";
 
+const StyledFab = styled(Fab)`
+  position: fixed;
+  bottom: 3vh;
+`;
 const StyledLoginPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
+`;
+
+const StyledSimpleTabs = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 `;
 const StyledTypography = styled(Typography)`
   background: #3f50b5;
@@ -52,6 +64,8 @@ const StyledTakePicture = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  // display: grid;
+  // grid-template-rows: 90% 10%;
 `;
 
 const StyledWebcam = styled(Webcam)`
@@ -81,6 +95,8 @@ const StyledDisplayedProvisionalPicture = styled.div`
   transform: translate(-50%, -50%);
 `;
 export {
+  StyledFab,
+  StyledSimpleTabs,
   StyledAppBar,
   StyledBox,
   StyledProvisionalPicture,
