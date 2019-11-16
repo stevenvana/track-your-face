@@ -67,15 +67,12 @@ export default function SimpleTabs(props) {
           <MenuIcon />
         </IconButton>
         <StyledMenu
-          // id="simple-menu"
           anchorEl={anchorEl}
-          // keepMounted
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
           {!takePicture ? (
             <MenuItem
-              // style={{ backgroundColor: "#3f51b5", color: "#FFF" }}
               style={{ color: "#3f51b5" }}
               onClick={e => {
                 changePage(e, true);
@@ -85,7 +82,6 @@ export default function SimpleTabs(props) {
             </MenuItem>
           ) : (
             <MenuItem
-              // style={{ backgroundColor: "#3f51b5", color: "#FFF" }}
               style={{ color: "#3f51b5" }}
               onClick={e => {
                 changePage(e, false);
@@ -94,11 +90,7 @@ export default function SimpleTabs(props) {
               Show Graph
             </MenuItem>
           )}
-          <MenuItem
-            // style={{ backgroundColor: "#3f51b5", color: "#FFF" }}
-            style={{ color: "#3f51b5" }}
-            onClick={signOut}
-          >
+          <MenuItem style={{ color: "#3f51b5" }} onClick={signOut}>
             Sign Out{" "}
             <FontAwesomeIcon
               style={{ marginLeft: "10px" }}
