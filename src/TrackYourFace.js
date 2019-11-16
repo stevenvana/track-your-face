@@ -10,7 +10,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faSignOutAlt, faBars } from "@fortawesome/free-solid-svg-icons";
 import Menu from "@material-ui/core/Menu";
 import TakePicture from "./TakePicture";
-import DisplayGraph from "./DisplayGraph";
+import DisplayGraph from "./DisplayGraph/DisplayGraph";
 import { StyledTrackYourFace, StyledMenuDiv } from "./styled";
 import { getUserData, saveUserData } from "./models";
 
