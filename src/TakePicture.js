@@ -57,6 +57,7 @@ export default function TakePicture(props) {
       if (emotionData.success) {
         setWebcamHidden(true);
         setProvisionalEmotionData(emotionData);
+        setModalOpen(true);
       } else {
         setErrorMessage(emotionData.errorMessage);
         setErrorModalOpen(true);
@@ -135,52 +136,60 @@ export default function TakePicture(props) {
             >
               Show Facial Emotion Data
             </Button>
-          </div>
+            {/* </div> */}
 
-          <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            open={modalOpen}
-            onClose={e => {
-              setModalOpen(false);
-            }}
-          >
-            <StyledEmotionPercentages
-              style={{
-                top: `50%`,
-                left: `50%`,
-                transform: `translate(-50%, -50%)`
+            <Modal
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              open={modalOpen}
+              onClose={e => {
+                setModalOpen(false);
               }}
-              className={classes.paper}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+              // classes={{ root: { display: "flex", justifyContent: "center" } }}
             >
-              <p>
-                anger: {`${Math.round(provisionalEmotionData.emotion.anger)}%`}
-              </p>
-              <p>
-                disgust:{" "}
-                {`${Math.round(provisionalEmotionData.emotion.disgust)}%`}
-              </p>
-              <p>
-                fear: {`${Math.round(provisionalEmotionData.emotion.fear)}%`}
-              </p>
-              <p>
-                happiness:{" "}
-                {`${Math.round(provisionalEmotionData.emotion.happiness)}%`}
-              </p>
-              <p>
-                neutral:{" "}
-                {`${Math.round(provisionalEmotionData.emotion.neutral)}%`}
-              </p>
-              <p>
-                sadness:{" "}
-                {`${Math.round(provisionalEmotionData.emotion.sadness)}%`}
-              </p>
-              <p>
-                surprise:{" "}
-                {`${Math.round(provisionalEmotionData.emotion.surprise)}%`}
-              </p>
-            </StyledEmotionPercentages>
-          </Modal>
+              <StyledEmotionPercentages
+              // style={{
+              //   top: `50%`,
+              //   left: `50%`,
+              //   transform: `translate(-50%, -50%)`
+              // }}
+              // className={classes.paper}
+              >
+                <p>
+                  anger:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.anger)}%`}
+                </p>
+                <p>
+                  disgust:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.disgust)}%`}
+                </p>
+                <p>
+                  fear: {`${Math.round(provisionalEmotionData.emotion.fear)}%`}
+                </p>
+                <p>
+                  happiness:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.happiness)}%`}
+                </p>
+                <p>
+                  neutral:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.neutral)}%`}
+                </p>
+                <p>
+                  sadness:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.sadness)}%`}
+                </p>
+                <p>
+                  surprise:{" "}
+                  {`${Math.round(provisionalEmotionData.emotion.surprise)}%`}
+                </p>
+              </StyledEmotionPercentages>
+            </Modal>
+          </div>
         </StyledProvisionalPicture>
       )}
     </>

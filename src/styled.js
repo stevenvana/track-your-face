@@ -62,12 +62,17 @@ const StyledProvisionalPicture = styled.div`
 
 const StyledEmotionPercentages = styled.div`
   color: #ffffff;
-  background: #3f50b5;
+  // background: #3f50b5;
+  background: transparent;
   border: 0px;
   box-shadow: none;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 const StyledTakePicture = styled.div`
