@@ -75,6 +75,13 @@ const StyledEmotionPercentages = styled.div`
   }
 `;
 
+const StyledErrorMessage = styled.div`
+  color: #ffffff;
+  background: transparent;
+  border: 0px;
+  box-shadow: none;
+`;
+
 const StyledTakePicture = styled.div`
   position: absolute;
   width: 100%;
@@ -123,5 +130,6 @@ export {
   StyledLoginPage,
   StyledMenuDiv,
   StyledMenu,
-  StyledImg
+  StyledImg,
+  StyledErrorMessage
 };

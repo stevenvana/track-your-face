@@ -1,12 +1,15 @@
 import React, { useState, useCallback, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-
+import NavigationIcon from "@material-ui/icons/Navigation";
+import AddIcon from "@material-ui/icons/Add";
+import Tooltip from "@material-ui/core/Tooltip";
+import Fab from "@material-ui/core/Fab";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { calculateEmotionData } from "./models";
 import {
@@ -15,12 +18,21 @@ import {
   StyledTakePicture,
   StyledWebcam,
   StyledFab,
-  StyledImg
+  StyledImg,
+  StyledErrorMessage
 } from "./styled";
 
 library.add(fab, faCamera);
 
 const useStyles = makeStyles(theme => ({
+  fab: {
+    margin: theme.spacing(2)
+  },
+  absolute: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(3)
+  },
   margin: {
     margin: theme.spacing(1)
   },
@@ -83,7 +95,6 @@ export default function TakePicture(props) {
           <StyledFab onClick={capture} color="primary" aria-label="add">
             <FontAwesomeIcon icon="camera" />
           </StyledFab>
-
           <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
@@ -91,53 +102,46 @@ export default function TakePicture(props) {
             onClose={e => {
               setErrorModalOpen(false);
             }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
           >
-            <StyledEmotionPercentages
-              style={{
-                top: `50%`,
-                left: `50%`,
-                transform: `translate(-50%, -50%)`
-              }}
-              className={classes.paper}
-            >
+            <StyledErrorMessage>
               <p>{errorMessage}</p>
-            </StyledEmotionPercentages>
+            </StyledErrorMessage>
           </Modal>
         </StyledTakePicture>
       ) : (
         <StyledProvisionalPicture>
           <StyledImg alt="provisionalPicture" src={provisionalPicture} />
-          <div>
-            <Button
-              onClick={e => {
-                saveEmotionData(provisionalEmotionData);
-                setWebcamHidden(false);
-                changePage(e, false);
-              }}
-              variant="contained"
-              className={classes.button}
-              color="primary"
-            >
-              Add Picture To Graph
-            </Button>
-            <Button
-              onClick={e => setWebcamHidden(false)}
-              variant="contained"
-              className={classes.button}
-              color="secondary"
-            >
-              Discard Picture
-            </Button>
-            <Button
-              onClick={e => setModalOpen(true)}
-              variant="contained"
-              className={classes.button}
-              color="primary"
-            >
-              Show Facial Emotion Data
-            </Button>
-            {/* </div> */}
-
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ position: "fixed", bottom: "3vh" }}>
+              <Tooltip title="Discard Picture" aria-label="delete">
+                <Fab onClick={e => setWebcamHidden(false)} color="secondary">
+                  <DeleteIcon />
+                </Fab>
+              </Tooltip>
+              <Tooltip title="Save Picture" aria-label="add">
+                <Fab
+                  onClick={e => {
+                    saveEmotionData(provisionalEmotionData);
+                    setWebcamHidden(false);
+                    changePage(e, false);
+                  }}
+                  color="primary"
+                  className={classes.fab}
+                >
+                  <AddIcon />
+                </Fab>
+              </Tooltip>
+              <Tooltip title="Show Facial Emotion Data">
+                <Fab aria-label="add" onClick={e => setModalOpen(true)}>
+                  <NavigationIcon />
+                </Fab>
+              </Tooltip>
+            </div>
             <Modal
               aria-labelledby="simple-modal-title"
               aria-describedby="simple-modal-description"
@@ -150,16 +154,8 @@ export default function TakePicture(props) {
                 justifyContent: "center",
                 alignItems: "center"
               }}
-              // classes={{ root: { display: "flex", justifyContent: "center" } }}
             >
-              <StyledEmotionPercentages
-              // style={{
-              //   top: `50%`,
-              //   left: `50%`,
-              //   transform: `translate(-50%, -50%)`
-              // }}
-              // className={classes.paper}
-              >
+              <StyledEmotionPercentages>
                 <p>
                   anger:{" "}
                   {`${Math.round(provisionalEmotionData.emotion.anger)}%`}
