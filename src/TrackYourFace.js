@@ -8,9 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faSignOutAlt, faBars } from "@fortawesome/free-solid-svg-icons";
+import Menu from "@material-ui/core/Menu";
 import TakePicture from "./TakePicture";
 import DisplayGraph from "./DisplayGraph";
-import { StyledMenu, StyledSimpleTabs, StyledMenuDiv } from "./styled";
+import { StyledTrackYourFace, StyledMenuDiv } from "./styled";
 import { getUserData, saveUserData } from "./models";
 
 const useStyles = makeStyles(theme => ({
@@ -21,11 +22,10 @@ const useStyles = makeStyles(theme => ({
 }));
 library.add(fab, faSignOutAlt, faBars);
 
-export default function SimpleTabs(props) {
+export default function TrackYourFace(props) {
   const { signOut, user } = props;
   const { uid } = user;
   const classes = useStyles();
-  // const [tabValue, setTabValue] = useState(0);
   const [takePicture, setTakePicture] = useState(true);
   const changePage = (event, bool) => {
     setTakePicture(bool);
@@ -55,7 +55,7 @@ export default function SimpleTabs(props) {
   }, [uid]);
 
   return (
-    <StyledSimpleTabs>
+    <StyledTrackYourFace>
       <StyledMenuDiv>
         <IconButton
           edge="start"
@@ -66,7 +66,7 @@ export default function SimpleTabs(props) {
         >
           <MenuIcon />
         </IconButton>
-        <StyledMenu
+        <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={handleClose}
@@ -97,7 +97,7 @@ export default function SimpleTabs(props) {
               icon="sign-out-alt"
             />
           </MenuItem>
-        </StyledMenu>
+        </Menu>
       </StyledMenuDiv>
       {takePicture ? (
         <TakePicture
@@ -107,11 +107,11 @@ export default function SimpleTabs(props) {
       ) : (
         <DisplayGraph emotionData={emotionData} changePage={changePage} />
       )}
-    </StyledSimpleTabs>
+    </StyledTrackYourFace>
   );
 }
 
-SimpleTabs.propTypes = {
+TrackYourFace.propTypes = {
   user: PropTypes.shape({
     displayName: PropTypes.string,
     emailVerified: PropTypes.bool,

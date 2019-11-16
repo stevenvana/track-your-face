@@ -4,12 +4,7 @@ import Box from "@material-ui/core/Box";
 import Webcam from "react-webcam";
 import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
-import Menu from "@material-ui/core/Menu";
 
-const StyledMenu = styled(Menu)`
-  // background: transparent;
-  // background-color: #3f51b5;
-`;
 const StyledMenuDiv = styled.div`
   position: fixed;
   top: 0px;
@@ -27,7 +22,7 @@ const StyledLoginPage = styled.div`
   color: white;
 `;
 
-const StyledSimpleTabs = styled.div`
+const StyledTrackYourFace = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -119,7 +114,7 @@ const StyledImg = styled.img`
 `;
 export {
   StyledFab,
-  StyledSimpleTabs,
+  StyledTrackYourFace,
   StyledAppBar,
   StyledBox,
   StyledProvisionalPicture,
@@ -129,7 +124,6 @@ export {
   StyledTypography,
   StyledLoginPage,
   StyledMenuDiv,
-  StyledMenu,
   StyledImg,
   StyledErrorMessage
 };

@@ -3,7 +3,7 @@ import { StylesProvider, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import withFirebaseAuth from "react-with-firebase-auth";
-import SimpleTabs from "./TrackYourFace";
+import TrackYourFace from "./TrackYourFace";
 import { StyledLoginPage } from "./styled";
 import { firebaseApp, providers } from "./firebase";
 
@@ -34,7 +34,7 @@ function App(props) {
     <div>
       <StylesProvider injectFirst>
         {user ? (
-          <SimpleTabs signOut={signOut} user={user} />
+          <TrackYourFace signOut={signOut} user={user} />
         ) : (
           <StyledLoginPage>
             <p>Please sign in to Track Your Face.</p>
