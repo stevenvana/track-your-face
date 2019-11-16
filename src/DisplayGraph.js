@@ -12,13 +12,13 @@ export default function DisplayGraph(props) {
     const tempData = [[], [], [], [], [], [], []];
     emotionData.forEach(measurement => {
       tempLabels.push(moment(measurement.date).calendar());
-      tempData[0].push(measurement.emotion.anger);
-      tempData[1].push(measurement.emotion.disgust);
-      tempData[2].push(measurement.emotion.fear);
-      tempData[3].push(measurement.emotion.happiness);
-      tempData[4].push(measurement.emotion.neutral);
-      tempData[5].push(measurement.emotion.sadness);
-      tempData[6].push(measurement.emotion.surprise);
+      tempData[0].push(Math.round(measurement.emotion.anger));
+      tempData[1].push(Math.round(measurement.emotion.disgust));
+      tempData[2].push(Math.round(measurement.emotion.fear));
+      tempData[3].push(Math.round(measurement.emotion.happiness));
+      tempData[4].push(Math.round(measurement.emotion.neutral));
+      tempData[5].push(Math.round(measurement.emotion.sadness));
+      tempData[6].push(Math.round(measurement.emotion.surprise));
     });
     const tempDatasets = data.datasets.map((emotionObject, i) => {
       return { ...emotionObject, data: tempData[i] };
@@ -35,7 +35,10 @@ export default function DisplayGraph(props) {
     const graphData = convertEDataToDGData();
     setLineGraphData(graphData);
   }, [convertEDataToDGData]);
-  return <Line data={lineGraphData} />;
+  const options = {
+    maintainAspectRatio: false
+  };
+  return <Line data={lineGraphData} options={options} />;
 }
 
 DisplayGraph.propTypes = {
