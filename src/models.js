@@ -1,5 +1,5 @@
 import axios from "axios";
-import { db } from "./firebase";
+import { db } from "./firebase/firebase";
 
 const b64toBlob = (b64Data, contentType = "", sliceSize = 512) => {
   const slicedB64Data = b64Data.split(",")[1];

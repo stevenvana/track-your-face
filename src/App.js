@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import withFirebaseAuth from "react-with-firebase-auth";
 import TrackYourFace from "./TrackYourFace";
 import { StyledLoginPage } from "./styled";
-import { firebaseApp, providers } from "./firebase";
+import { firebaseApp, providers } from "./firebase/firebase";
 
 const firebaseAppAuth = firebaseApp.auth();
 
